@@ -1,6 +1,6 @@
-'use strict';
+'use strict'; // jshint ignore:line
 var webpack = require('webpack'),
-path = require('path');
+    path = require('path');
 
 var SRC = path.join( __dirname,'/src');
 var DIST = path.join(__dirname,'/dist');
@@ -11,7 +11,8 @@ var semantic_dir = path.join(__dirname,'/semantic/dist/'),
 module.exports = {
   devtool: 'eval',
   entry: {
-    common: ['angular', 'angular-ui-router', 'jquery', 'semantic', 'semantic.css', 'leaflet.css'],
+    vendor: ['angular', 'angular-ui-router', 'angular-jwt', 'angular-storage', 'jquery', 'semantic'],
+    common: ['semantic.css', 'leaflet.css'],
     bundle: [
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
@@ -24,12 +25,8 @@ module.exports = {
     publicPath: '/dist/'
   },
   resolve: {
-    modulesDirectories: [
-      'node_modules',semantic_dir,leaflet_dir
-      // path.join(__dirname,'/semantic/dist/'),
-      // path.join(__dirname,'node_modules/leaflet/dist')
-    ],
-    extensions: ['', '.js', '.css'],
+    modulesDirectories: ['node_modules', semantic_dir, leaflet_dir],
+    extensions: ['', '.js', '.css']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -38,7 +35,7 @@ module.exports = {
        jQuery: "jquery"
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "common",
+      name: "vendor",
       minChunks: 2
     })
   ],
