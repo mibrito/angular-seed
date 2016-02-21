@@ -26,7 +26,10 @@ module.exports = {
   },
   resolve: {
     modulesDirectories: ['node_modules', semantic_dir, leaflet_dir],
-    extensions: ['', '.js', '.css']
+    extensions: ['', '.js', '.css'],
+    alias: {
+      leaflet_images: path.join(__dirname, 'node_modules/leaflet/dist/images')
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
